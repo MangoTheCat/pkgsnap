@@ -1,0 +1,94 @@
+
+```{r, setup, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  tidy = FALSE,
+  error = FALSE,
+  fig.width = 8,
+  fig.height = 8)
+```
+
+# pkgsnap
+
+> Backup and Restore Certain CRAN Package Versions
+
+[![Linux Build Status](https://travis-ci.org/MangoTheCat/pkgsnap.svg?branch=master)](https://travis-ci.org/MangoTheCat/pkgsnap)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/MangoTheCat/pkgsnap?svg=true)](https://ci.appveyor.com/project/gaborcsardi/pkgsnap)
+[![](http://www.r-pkg.org/badges/version/pkgsnap)](http://www.r-pkg.org/pkg/pkgsnap)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/pkgsnap)](http://www.r-pkg.org/pkg/pkgsnap)
+
+
+Create a snapshot of your installed CRAN packages with 'snap', and then
+use 'restore' on another system to recreate exactly the same environment.
+
+## Installation
+
+```{r eval = FALSE}
+devtools::install_github("mangothecat/pkgsnap")
+```
+
+## Usage
+
+```{r}
+library(pkgsnap)
+```
+
+For this experiment we create a new library directory, and install
+some packages there. We will then remove this directory entirely,
+and recreate it using `pkgsnap`.
+
+```{r}
+lib_dir <- tempfile()
+dir.create(lib_dir)
+```
+
+We make this new library directory the default:
+
+```{r}
+.libPaths(lib_dir)
+```
+
+The new library directory is currently empty:
+
+```{r}
+installed.packages(lib_dir)[, c("Package", "Version")]
+```
+
+Let's install some packages here. Note that the dependencies of these
+packages will be also installed.
+
+```{r}
+install.packages(c("testthat", "pkgconfig"))
+installed.packages(lib_dir)[, c("Package", "Version")]
+```
+
+We will now create a snapshot, and then scrap the temporary package
+library.
+
+```{r}
+snapshot <- tempfile()
+snap(to = snapshot)
+read.csv(snapshot)[1:5,]
+unlink(lib_dir, recursive = TRUE)
+```
+
+Create a new package library.
+
+```{r}
+new_lib_dir <- tempfile()
+dir.create(new_lib_dir)
+.libPaths(new_lib_dir)
+```
+
+Finally, recreate the same set of package versions, in a new package
+library.
+
+```{r}
+restore(snapshot)
+installed.packages(new_lib_dir)[, c("Package", "Version")]
+```
+
+
+## License
+
+MIT + file LICENSE © [Mango Solutions](https://github.com/mangothecat).
