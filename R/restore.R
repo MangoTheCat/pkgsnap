@@ -15,7 +15,7 @@
 restore <- function(from = "packages.csv", ...) {
 
   if (is.character(from)) {
-    pkgs <- read.csv("packages.csv", stringsAsFactors = FALSE)
+    pkgs <- read.csv(from, stringsAsFactors = FALSE)
 
   } else {
     pkgs <- from
