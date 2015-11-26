@@ -1,0 +1,12 @@
+Package: pkgsnap
+Title: Backup and Restore Certain CRAN Package Versions
+Version: 1.0.0
+Author: Gabor Csardi
+Maintainer: Gabor Csardi <gcsardi@mango-colutions.com>
+Description: TODO
+License: MIT + file LICENSE
+LazyData: true
+URL: https://github.com/mangothecat/pkgsnap
+BugReports: https://github.com/mangothecat/pkgsnap/issues
+Suggests: 
+    testthat
