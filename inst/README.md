@@ -164,4 +164,4 @@ installed.packages(new_lib_dir)[, c("Package", "Version")]
 
 ## License
 
-MIT + file LICENSE © [Mango Solutions](https://github.com/mangothecat).
+MIT © [Mango Solutions](https://github.com/mangothecat).
