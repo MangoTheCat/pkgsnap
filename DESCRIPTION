@@ -1,12 +1,15 @@
 Package: pkgsnap
-Title: Backup and Restore Certain CRAN Package Versions
+Title: Backup and Restore CRAN Package Versions
 Version: 1.0.0
 Author: Gabor Csardi
 Maintainer: Gabor Csardi <gcsardi@mango-colutions.com>
-Description: TODO
+Description: Create a snapshot of your installed CRAN packages with
+    'snap', and then user 'restore' on another system to recreate
+    exactly the same environment.
 License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/mangothecat/pkgsnap
 BugReports: https://github.com/mangothecat/pkgsnap/issues
-Suggests: 
+Suggests:
     testthat
+RoxygenNote: 5.0.1
