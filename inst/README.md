@@ -7,6 +7,7 @@
 
 [![Linux Build Status](https://travis-ci.org/MangoTheCat/pkgsnap.svg?branch=master)](https://travis-ci.org/MangoTheCat/pkgsnap)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/github/MangoTheCat/pkgsnap?svg=true)](https://ci.appveyor.com/project/gaborcsardi/pkgsnap)
+[![Coverage Status](https://img.shields.io/codecov/c/github/mangothecat/pkgsnap/master.svg)](https://codecov.io/github/mangothecat/pkgsnap?branch=master)
 [![](http://www.r-pkg.org/badges/version/pkgsnap)](http://www.r-pkg.org/pkg/pkgsnap)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/pkgsnap)](http://www.r-pkg.org/pkg/pkgsnap)
 
