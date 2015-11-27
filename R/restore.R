@@ -44,10 +44,33 @@ restore <- function(from = "packages.csv", ...) {
   }
 }
 
+#' Drop dependencies that were not included in the snapshot
+#'
+#' These are probably not needed for the installed functions
+#' to work.
+#'
+#' @param deps A named list of character vectors.
+#' @return A (filtered) named list of character vectors.
+#'
+#' @keywords internal
+
 drop_missing_deps <- function(deps) {
   pkgs <- names(deps)
   lapply(deps, intersect, pkgs)
 }
+
+#' Topological order of the packages
+#'
+#' This is the correct installation order.
+#'
+#' @param graph A named list of character vectors, interpreted as
+#'   an adjacnecy list. If \code{A->B} then package \code{A} depends
+#'   on package \code{B}, so package \code{B} must be loaded before
+#'   package \code{A}.
+#' @return Character vector of package names in an order that
+#'   can be used to install them.
+#'
+#' @keywords internal
 
 install_order <- function(graph) {
 
