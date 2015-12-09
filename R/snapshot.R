@@ -34,10 +34,37 @@ snap <- function(to = "packages.csv", recommended = FALSE) {
   rownames(pkgs) <- NULL
   pkgs <- as.data.frame(pkgs, stringsAsFactors = FALSE)
 
+  # Add the R version to the top of the list
+  pkgs <- add_R_core(pkgs)
+  
   if (!is.null(to)) {
     write.csv(pkgs, file = to, row.names = FALSE)
     invisible(pkgs)
   } else {
     pkgs
   }
+}
+
+#' Add R version to package inventory
+#'
+#' @param pkgs data.frame of installed packages with columns Package and Version.
+#'
+#' @return The same data.frame with the R version listed as "R" and the
+#' version in major.minor format (e.g. R 3.2.2).
+#'
+#' @keywords internal
+#' 
+add_R_core <- function(pkgs) {
+  
+  # Check it's in the format we're expecting
+  if(length(pkgs) != 2) stop("pkgs does not have 2 columns")
+  if(!all(names(pkgs) == c("Package", "Version"))) {
+    stop("pkgs Col names should be Package and Version")
+  }
+  
+  coreVersion <- paste(R.version$major, R.version$minor, sep = ".")
+  
+  coreEntry <- data.frame(Package = "R", Version = coreVersion,
+                          stringsAsFactors = FALSE)
+  rbind(coreEntry, pkgs)
 }

@@ -7,12 +7,14 @@
 #' @param from Name of a file created by \code{\link{snap}}.
 #'   Alternatively a data frame with columns \code{Package} and
 #'   \code{Version}.
+#' @param R If TRUE the target version of R must match.
+#' Otherwise it will only give a warning.
 #' @param ... Additional arguments, passed to \code{install.packages}.
 #'
 #' @export
 #' @importFrom utils install.packages read.csv
 
-restore <- function(from = "packages.csv", ...) {
+restore <- function(from = "packages.csv", R = TRUE, ...) {
 
   if (is.character(from)) {
     pkgs <- read.csv(from, stringsAsFactors = FALSE)
@@ -20,6 +22,9 @@ restore <- function(from = "packages.csv", ...) {
   } else {
     pkgs <- from
   }
+  
+  # Check the R version and remove from the list
+  pkgs <- check_R_core(pkgs, R)
 
   pkg_files <- pkg_download(
     paste(pkgs$Package, sep = "-", pkgs$Version),
@@ -104,4 +109,43 @@ install_order <- function(graph) {
   }
 
   rev(result)
+}
+
+#' Check listed R version against installed
+#'
+#' @param pkgs data.frame read from the csv file.
+#' @param R If TRUE it will error when the R versions mismatch.
+#' Otherwise it will just give a warning.
+#' @return The same data.frame with the R package removed.
+#'
+#' @keywords internal
+#' 
+check_R_core <- function(pkgs, R) {
+  
+  # Find the row containing R
+  ir <- which(pkgs$Package == "R")
+  
+  if (length(ir) == 1) {
+    # The R version on this installation
+    coreVersion <- paste(R.version$major, R.version$minor, sep = ".")
+    pkgsVersion <- pkgs$Version[ir]
+    
+    if(pkgsVersion != coreVersion) {
+      if (R) {
+        stop("Packages were installed with R ", pkgsVersion,
+             ", you have ", coreVersion, ". Call with R = FALSE",
+             " to override.")
+      } else {
+        warning("Packages were installed with R ", pkgsVersion,
+                ", you have ", coreVersion, ".")
+      }
+    }
+    # Remove from the manifest
+    pkgs <- pkgs[-ir, ]
+    
+  } else {
+    warning("No R version listed with package list.")
+  }
+  
+  pkgs
 }
