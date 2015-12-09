@@ -13,8 +13,12 @@
 #'   defaults to \code{packages.csv}. If it is NULL,
 #'   to output file is created and the result is returned
 #'   as a data frame.
+#' @param lib.loc character vector describing the 
+#'   location of R library trees to search through, or 
+#'   \code{NULL} for all known trees (see 
+#'   \code{\link[base]{.libPaths}}).
 #' @param recommended if TRUE then recommended packages
-#' will be included in the snapshot.
+#'   will be included in the snapshot.
 #' @return A two columns data frame, invisibly if it was
 #'   written to a file.
 #'
@@ -25,11 +29,11 @@
 #'
 #' head(read.csv(tmp))
 
-snap <- function(to = "packages.csv", recommended = FALSE) {
+snap <- function(to = "packages.csv", lib.loc = NULL, recommended = FALSE) {
   
   priority <- if (recommended) "recommended" else c( "recommended", NA_character_)
   
-  pkgs <- installed.packages(priority = priority)
+  pkgs <- installed.packages(lib.loc = lib.loc, priority = priority)
   pkgs <- pkgs[, c("Package", "Version"), drop = FALSE]
   rownames(pkgs) <- NULL
   pkgs <- as.data.frame(pkgs, stringsAsFactors = FALSE)
