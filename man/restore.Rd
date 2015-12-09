@@ -4,12 +4,15 @@
 \alias{restore}
 \title{Restore (=install) certain CRAN package versions}
 \usage{
-restore(from = "packages.csv", ...)
+restore(from = "packages.csv", R = TRUE, ...)
 }
 \arguments{
 \item{from}{Name of a file created by \code{\link{snap}}.
 Alternatively a data frame with columns \code{Package} and
 \code{Version}.}
+
+\item{R}{If TRUE the target version of R must match.
+Otherwise it will only give a warning.}
 
 \item{...}{Additional arguments, passed to \code{install.packages}.}
 }

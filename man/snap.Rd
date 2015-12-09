@@ -4,13 +4,16 @@
 \alias{snap}
 \title{Write installed package versions to a file}
 \usage{
-snap(to = "packages.csv")
+snap(to = "packages.csv", recommended = FALSE)
 }
 \arguments{
 \item{to}{File to write the package versions to,
 defaults to \code{packages.csv}. If it is NULL,
 to output file is created and the result is returned
 as a data frame.}
+
+\item{recommended}{if TRUE then recommended packages
+will be included in the snapshot.}
 }
 \value{
 A two columns data frame, invisibly if it was
