@@ -14,6 +14,11 @@ as a data frame.}
 
 \item{recommended}{if TRUE then recommended packages
 will be included in the snapshot.}
+
+\item{lib.loc}{character vector describing the 
+location of R library trees to search through, or 
+\code{NULL} for all known trees (see 
+\code{\link[base]{.libPaths}}).}
 }
 \value{
 A two columns data frame, invisibly if it was
