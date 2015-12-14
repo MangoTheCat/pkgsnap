@@ -2,7 +2,8 @@
 #' Restore (=install) certain CRAN package versions
 #'
 #' Functions that were not installed from CRAN will not be restored,
-#' they will be ignored with a warning.
+#' they will be ignored with a warning. The pkgsnap package itself is
+#' also ignored as it must be installed to run this function.
 #'
 #' @param from Name of a file created by \code{\link{snap}}.
 #'   Alternatively a data frame with columns \code{Package} and
@@ -25,6 +26,9 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   
   # Check the R version and remove from the list
   pkgs <- check_R_core(pkgs, R)
+  
+  # Remove this package (pkgsnap) from the list
+  pkgs <- pkgs[pkgs$Package!="pkgsnap", ]
 
   pkg_files <- pkg_download(
     paste(pkgs$Package, sep = "-", pkgs$Version),
