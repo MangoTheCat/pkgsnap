@@ -31,7 +31,7 @@
 
 snap <- function(to = "packages.csv", lib.loc = NULL, recommended = FALSE) {
   
-  priority <- if (recommended) "recommended" else c( "recommended", NA_character_)
+  priority <- if (recommended) c( "recommended", NA_character_) else NA_character_ 
   
   pkgs <- installed.packages(lib.loc = lib.loc, priority = priority)
   pkgs <- pkgs[, c("Package", "Version"), drop = FALSE]

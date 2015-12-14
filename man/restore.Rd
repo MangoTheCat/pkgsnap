@@ -18,6 +18,7 @@ Otherwise it will only give a warning.}
 }
 \description{
 Functions that were not installed from CRAN will not be restored,
-they will be ignored with a warning.
+they will be ignored with a warning. The pkgsnap package itself is
+also ignored as it must be installed to run this function.
 }
 
