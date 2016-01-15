@@ -5,6 +5,7 @@
 
 > Backup and Restore Certain CRAN Package Versions
 
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Linux Build Status](https://travis-ci.org/MangoTheCat/pkgsnap.svg?branch=master)](https://travis-ci.org/MangoTheCat/pkgsnap)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/github/MangoTheCat/pkgsnap?svg=true)](https://ci.appveyor.com/project/gaborcsardi/pkgsnap)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mangothecat/pkgsnap/master.svg)](https://codecov.io/github/mangothecat/pkgsnap?branch=master)
@@ -66,15 +67,31 @@ install.packages(c("testthat", "pkgconfig"))
 ```
 
 ```
-#> Installing packages into '/private/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T/RtmprA6J6b/filec6446f7bd8a8'
+#> Installing packages into '/private/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T/Rtmp7i74PQ/file12dc249d4d0de'
 #> (as 'lib' is unspecified)
 #> also installing the dependencies 'memoise', 'digest', 'crayon', 'praise'
 ```
 
 ```
 #> 
+#>   There is a binary version available but the source version is
+#>   later:
+#>        binary source needs_compilation
+#> digest  0.6.8  0.6.9              TRUE
+#> 
+#> 
 #> The downloaded binary packages are in
-#> 	/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T//RtmprA6J6b/downloaded_packages
+#> 	/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T//Rtmp7i74PQ/downloaded_packages
+```
+
+```
+#> installing the source package 'digest'
+```
+
+```
+#> 
+#> The downloaded source packages are in
+#> 	'/private/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T/Rtmp7i74PQ/downloaded_packages'
 ```
 
 ```r
@@ -84,7 +101,7 @@ installed.packages(lib_dir)[, c("Package", "Version")]
 ```
 #>           Package     Version 
 #> crayon    "crayon"    "1.3.1" 
-#> digest    "digest"    "0.6.8" 
+#> digest    "digest"    "0.6.9" 
 #> memoise   "memoise"   "0.2.1" 
 #> pkgconfig "pkgconfig" "2.0.0" 
 #> praise    "praise"    "1.0.0" 
@@ -103,11 +120,11 @@ read.csv(snapshot)[1:5,]
 
 ```
 #>     Package Version
-#> 1    crayon   1.3.1
-#> 2    digest   0.6.8
-#> 3   memoise   0.2.1
-#> 4 pkgconfig   2.0.0
-#> 5    praise   1.0.0
+#> 1         R   3.2.3
+#> 2    crayon   1.3.1
+#> 3    digest   0.6.9
+#> 4   memoise   0.2.1
+#> 5 pkgconfig   2.0.0
 ```
 
 ```r
@@ -134,13 +151,13 @@ restore(snapshot)
 ```
 #> Downloading
 #>   crayon_1.3.1.tgz...  done.
-#>   digest_0.6.8.tgz...  done.
+#>   digest_0.6.9.tgz...   digest_0.6.9.tar.gz...  done.
 #>   memoise_0.2.1.tgz...  done.
 #>   pkgconfig_2.0.0.tgz...  done.
 #>   praise_1.0.0.tgz...  done.
 #>   testthat_0.11.0.tgz...  done.
 #> Installing
-#>   digest_0.6.8.tgz ... done.
+#>   digest_0.6.9.tar.gz ... done.
 #>   memoise_0.2.1.tgz ... done.
 #>   crayon_1.3.1.tgz ... done.
 #>   pkgconfig_2.0.0.tgz ... done.
@@ -155,7 +172,7 @@ installed.packages(new_lib_dir)[, c("Package", "Version")]
 ```
 #>           Package     Version 
 #> crayon    "crayon"    "1.3.1" 
-#> digest    "digest"    "0.6.8" 
+#> digest    "digest"    "0.6.9" 
 #> memoise   "memoise"   "0.2.1" 
 #> pkgconfig "pkgconfig" "2.0.0" 
 #> praise    "praise"    "1.0.0" 
