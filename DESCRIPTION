@@ -11,5 +11,7 @@ LazyData: true
 URL: https://github.com/mangothecat/pkgsnap
 BugReports: https://github.com/mangothecat/pkgsnap/issues
 Suggests:
+    pingr,
+    remotes,
     testthat
 RoxygenNote: 5.0.1
