@@ -33,10 +33,7 @@ snap <- function(to = "packages.csv", lib.loc = NULL, recommended = FALSE) {
   
   priority <- if (recommended) c( "recommended", NA_character_) else NA_character_ 
   
-  pkgs <- installed.packages(lib.loc = lib.loc, priority = priority)
-  pkgs <- pkgs[, c("Package", "Version"), drop = FALSE]
-  rownames(pkgs) <- NULL
-  pkgs <- as.data.frame(pkgs, stringsAsFactors = FALSE)
+  pkgs <- get_package_metadata(lib.loc = lib.loc, priority = priority)
 
   # Add the R version to the top of the list
   pkgs <- add_R_core(pkgs)
@@ -61,14 +58,20 @@ snap <- function(to = "packages.csv", lib.loc = NULL, recommended = FALSE) {
 add_R_core <- function(pkgs) {
   
   # Check it's in the format we're expecting
-  if(length(pkgs) != 2) stop("pkgs does not have 2 columns")
-  if(!all(names(pkgs) == c("Package", "Version"))) {
-    stop("pkgs Col names should be Package and Version")
+  if(length(pkgs) != 4) stop("pkgs does not have 2 columns")
+  if(!all(names(pkgs) == c("Package", "Version", "Source", "Link"))) {
+    stop("pkgs Col names should be Package, Version, Source, Link")
   }
   
   coreVersion <- paste(R.version$major, R.version$minor, sep = ".")
   
-  coreEntry <- data.frame(Package = "R", Version = coreVersion,
-                          stringsAsFactors = FALSE)
+  coreEntry <- data.frame(
+    Package = "R",
+    Version = coreVersion,
+    Source = "R",
+    Link = NA_character_,
+    stringsAsFactors = FALSE
+  )
+
   rbind(coreEntry, pkgs)
 }
