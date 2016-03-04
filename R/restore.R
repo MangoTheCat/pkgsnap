@@ -23,6 +23,8 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   } else {
     pkgs <- from
   }
+
+  pkgs <- pkgs[, 1:2]
   
   # Check the R version and remove from the list
   pkgs <- check_R_core(pkgs, R)
