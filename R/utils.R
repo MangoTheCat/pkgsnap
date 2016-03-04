@@ -80,7 +80,8 @@ split_pkg_names_versions <- function(pkgs) {
   }
 
   pkgtab <- data_frame(
-    name = sub("-.*$", "", pkgs),
+    repo = sub("^([a-zA-Z]+):.*", "\\1", pkgs),
+    name = sub(".*:(.*)-.*$", "\\1", pkgs),
     version = sub("^[^-]*-?", "", pkgs)
   )
 

@@ -9,7 +9,7 @@ test_that("works well for CRAN packages", {
   tmp <- tempfile()
   dir.create(tmp)
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-  
+
   install.packages("pkgconfig", lib = tmp, quiet = TRUE)
   install.packages("falsy", lib = tmp, quiet = TRUE)
 
@@ -30,21 +30,19 @@ test_that("works for bioc packages", {
   tmp <- tempfile()
   dir.create(tmp)
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-  
-  install.packages("pkgconfig", lib = tmp, quiet = TRUE)
-  suppressWarnings(
-    remotes::install_github(
-      "Bioconductor-mirror/BiocInstaller",
-      lib = tmp,
-      quiet = TRUE
+
+  withr::with_libpaths(tmp, {
+    ## Install
+    install.packages("pkgconfig", lib = tmp, quiet = TRUE)
+    source("https://bioconductor.org/biocLite.R")
+    biocLite("BiocInstaller", lib = tmp, quiet = TRUE, ask = FALSE,
+             suppressUpdates = TRUE)
+
+    pkgs <- get_package_metadata(tmp, priority = NA_character_)
+
+    expect_equal(
+      pkgs$Source,
+      c("bioc", "cran")
     )
-  )
-
-  pkgs <- get_package_metadata(tmp, priority = NA_character_)
-
-  expect_equal(
-    pkgs$Source,
-    c("bioc", "cran")
-  )
-
+  })
 })

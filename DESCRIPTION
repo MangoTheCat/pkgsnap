@@ -13,7 +13,8 @@ BugReports: https://github.com/mangothecat/pkgsnap/issues
 Suggests:
     pingr,
     remotes,
-    testthat
+    testthat,
+    withr
 Remotes:
     MangoTheCat/remotes
 RoxygenNote: 5.0.1

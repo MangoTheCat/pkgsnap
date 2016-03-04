@@ -23,8 +23,6 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   } else {
     pkgs <- from
   }
-
-  pkgs <- pkgs[, 1:2]
   
   # Check the R version and remove from the list
   pkgs <- check_R_core(pkgs, R)
@@ -32,10 +30,13 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   # Remove this package (pkgsnap) from the list
   pkgs <- pkgs[pkgs$Package!="pkgsnap", ]
 
-  pkg_files <- pkg_download(
-    paste(pkgs$Package, sep = "-", pkgs$Version),
-    dest_dir = tempdir()
+  ## Download and return the downloaded file names
+  pkg_names <- paste0(
+    pkgs$Source, ":",
+    pkgs$Package, "-",
+    pkgs$Version
   )
+  pkg_files <- pkg_download(pkg_names, dest_dir = tempdir())
   names(pkg_files) <- pkgs$Package
 
   ## Ignore non-CRAN packages
