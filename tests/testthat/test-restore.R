@@ -14,7 +14,7 @@ test_that("CRAN packages are fine", {
     ## Install
     install.packages("pkgconfig", lib = tmp, quiet = TRUE)
     source("https://bioconductor.org/biocLite.R")
-    biocLite("BiocInstaller", lib = tmp, quiet = TRUE, ask = FALSE,
+    biocLite("BiocGenerics", lib = tmp, quiet = TRUE, ask = FALSE,
              suppressUpdates = TRUE)
 
     ## Snapshot
@@ -30,7 +30,7 @@ test_that("CRAN packages are fine", {
 
     ## Check
     inst <- installed.packages(lib = tmp)
-    expect_equal(rownames(inst), c("BiocInstaller", "pkgconfig"))
+    expect_equal(rownames(inst), c("BiocGenerics", "pkgconfig"))
   })
 })
 
