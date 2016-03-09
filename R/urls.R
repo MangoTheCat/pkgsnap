@@ -101,14 +101,14 @@ download_urls <- function(pkgs) {
 
   lapply(seq_len(nrow(pkgs)), function(i) {
 
-    if (pkgs$repo[i] == "cran") {
-      cran_file(pkgs$name[i], pkgs$version[i])
+    if (pkgs$Source[i] == "cran") {
+      cran_file(pkgs$Package[i], pkgs$Version[i])
 
-    } else if (pkgs$repo[i] == "bioc") {
-      bioc_file(pkgs$name[i], pkgs$version[i])
+    } else if (pkgs$Source[i] == "bioc") {
+      bioc_file(pkgs$Package[i], pkgs$Version[i])
 
-    } else if (pkgs$repo[i] == "url") {
-      ## TODO
+    } else if (pkgs$Source[i] == "url") {
+      pkgs$Link[i]
 
     } else {
       warning("Unknown package source: ", pkgs$repo[i])
