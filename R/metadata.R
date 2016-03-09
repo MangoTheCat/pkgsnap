@@ -1,5 +1,5 @@
 
-extra_fields <- c("Repository", "biocViews")
+extra_fields <- c("Repository", "biocViews", "RemoteType", "RemoteUrl")
 
 get_package_metadata <- function(lib.loc, priority) {
   pkgs <- installed.packages(
@@ -30,6 +30,8 @@ get_package_sources <- function(pkgs) {
 
   source[vapply(pkgs[, "Repository"], identical, TRUE, y = "CRAN")] <- "cran"
   source[! vapply(pkgs[, "biocViews" ], is.na, TRUE)] <- "bioc"
+  source[vapply(pkgs[, "RemoteType"], identical, TRUE, y = "url") &
+           ! vapply(pkgs[, "RemoteUrl"], is.na, TRUE)] <- "url"
 
   cbind(Source = source, Link = link)
 }
