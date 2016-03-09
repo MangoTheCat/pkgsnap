@@ -17,7 +17,7 @@ pkg_download <- function(pkgs, dest_dir = ".") {
 
   message("Downloading")
   urls <- download_urls(pkgs)
-  result <- vapply(seq_along(pkgs), FUN.VALUE = "", FUN = function(i) {
+  result <- vapply(seq_along(urls), FUN.VALUE = "", FUN = function(i) {
     url <- urls[[i]]
     if (! length(url)) message("  ", pkgs[i, "Package"], " Error: no files.")
     res <- FALSE
