@@ -112,6 +112,7 @@ download_urls <- function(pkgs) {
 
     } else {
       warning("Unknown package source: ", pkgs$repo[i])
+      character()
     }
   })
 }
