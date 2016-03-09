@@ -28,10 +28,22 @@ get_package_sources <- function(pkgs) {
   source <- rep(NA, nrow(pkgs))
   link <- rep(NA, nrow(pkgs))
 
-  source[vapply(pkgs[, "Repository"], identical, TRUE, y = "CRAN")] <- "cran"
-  source[! vapply(pkgs[, "biocViews" ], is.na, TRUE)] <- "bioc"
+  ## CRAN
+  cran <- vapply(pkgs[, "Repository"], identical, TRUE, y = "CRAN")
+  source[cran] <- "cran"
 
-  url <- vapply(pkgs[, "RemoteType"], identical, TRUE, y = "url") &
+  ## R-Forge
+  rforge <- vapply(pkgs[, "Repository"], identical, TRUE, y = "R-Forge")
+  source[rforge] <- "rforge"
+
+  ## BioC
+  bioc <- ! vapply(pkgs[, "biocViews" ], is.na, TRUE)
+  source[bioc] <- "bioc"
+
+  ## Packages installed from URLs via devtools::install_url or
+  ## remotes::install_url
+  url <-
+    vapply(pkgs[, "RemoteType"], identical, TRUE, y = "url") &
     ! vapply(pkgs[, "RemoteUrl"], is.na, TRUE)
   source[url] <- "url"
   link[url] <- pkgs[url, "RemoteUrl"]

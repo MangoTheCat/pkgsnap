@@ -68,3 +68,40 @@ test_that("Packages from URLs are fine", {
   expect_equal(rownames(inst), c("pkgconfig", "sankey"))
 
 })
+
+test_that("Packages from R-Forge are fine", {
+
+  skip_on_cran()
+  skip_if_offline()
+
+  tmp <- tempfile()
+  dir.create(tmp)
+  on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+
+  ## Install
+  install.packages("pkgconfig", lib = tmp, quiet = TRUE)
+  suppressWarnings(
+    install.packages(
+      "MSToolkit",
+      repos = "http://R-Forge.R-project.org",
+      lib = tmp,
+      quiet = TRUE
+    )
+  )
+
+  ## Snapshot
+  pkgs <- tempfile()
+  snap(to = pkgs, lib.loc = tmp)
+
+  ## Remove
+  unlink(tmp, recursive = TRUE)
+  dir.create(tmp)
+
+  ## Restore
+  restore(from = pkgs, lib = tmp)
+
+  ## Check
+  inst <- installed.packages(lib = tmp)
+  expect_equal(rownames(inst), c("MSToolkit", "pkgconfig"))
+
+})

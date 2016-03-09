@@ -90,6 +90,15 @@ bioc_file <- function(...) {
   ))
 }
 
+rforge_file <- function(package, version) {
+
+  sprintf(
+    "http://download.r-forge.r-project.org/src/contrib/%s_%s.tar.gz",
+    package,
+    version
+  )
+}
+
 #' Get download urls for a bunch of packages
 #'
 #' @param pkgs Data frame of packages.
@@ -106,6 +115,9 @@ download_urls <- function(pkgs) {
 
     } else if (pkgs$Source[i] == "bioc") {
       bioc_file(pkgs$Package[i], pkgs$Version[i])
+
+    } else if (pkgs$Source[i] == "rforge") {
+      rforge_file(pkgs$Package[i], pkgs$Version[i])
 
     } else if (pkgs$Source[i] == "url") {
       pkgs$Link[i]
