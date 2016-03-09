@@ -33,3 +33,38 @@ test_that("CRAN packages are fine", {
     expect_equal(rownames(inst), c("BiocInstaller", "pkgconfig"))
   })
 })
+
+
+test_that("Packages from URLs are fine", {
+
+  skip_on_cran()
+  skip_if_offline()
+
+  tmp <- tempfile()
+  dir.create(tmp)
+  on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+
+  ## Install
+  install.packages("pkgconfig", lib = tmp, quiet = TRUE)
+  remotes::install_url(
+    "https://cran.rstudio.com/src/contrib/sankey_1.0.0.tar.gz",
+    lib = tmp,
+    quiet = TRUE
+  )
+
+  ## Snapshot
+  pkgs <- tempfile()
+  snap(to = pkgs, lib.loc = tmp)
+
+  ## Remove
+  unlink(tmp, recursive = TRUE)
+  dir.create(tmp)
+
+  ## Restore
+  restore(from = pkgs, lib = tmp)
+
+  ## Check
+  inst <- installed.packages(lib = tmp)
+  expect_equal(rownames(inst), c("pkgconfig", "sankey"))
+
+})
