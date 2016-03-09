@@ -31,16 +31,7 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   pkgs <- pkgs[pkgs$Package!="pkgsnap", ]
 
   ## Download and return the downloaded file names
-  pkg_names <- paste0(
-    pkgs$Source, ":",
-    pkgs$Package, "-",
-    pkgs$Version
-  )
-  pkg_files <- pkg_download(pkg_names, dest_dir = tempdir())
-  names(pkg_files) <- pkgs$Package
-
-  ## Ignore non-CRAN packages
-  pkg_files <- na.omit(pkg_files)
+  pkg_files <- pkg_download(pkgs, dest_dir = tempdir())
 
   deps <- lapply(pkg_files, get_deps)
 

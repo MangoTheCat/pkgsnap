@@ -1,7 +1,7 @@
 
 #' Download R packages (or other files)
 #'
-#' @param pkgs A character vector of URLs to try.
+#' @param pkgs The data frame of packages to download.
 #' @param dest_dir Destination directory for the downloaded files.
 #'   The actual file names are extracted from the URLs.
 #' @return Path to the downloaded file, or \code{NA_character_}
@@ -10,10 +10,7 @@
 #' @keywords internal
 
 pkg_download <- function(pkgs, dest_dir = ".") {
-  pkgs <- as.character(pkgs)
   dest_dir <- as.character(dest_dir)
-
-  stopifnot(all(!is.na(pkgs)))
 
   stopifnot(all(!is.na(dest_dir)), length(dest_dir) == 1)
   stopifnot(dir_exists(dest_dir))
@@ -22,17 +19,20 @@ pkg_download <- function(pkgs, dest_dir = ".") {
   urls <- download_urls(pkgs)
   result <- vapply(seq_along(pkgs), FUN.VALUE = "", FUN = function(i) {
     url <- urls[[i]]
-    if (! length(url)) message("  ", pkgs[i], " Error: no files.")
+    if (! length(url)) message("  ", pkgs[i, "Package"], " Error: no files.")
     res <- FALSE
     for (u in url) {
-      dest_file <- file.path(dest_dir, filename_from_url(u, pkgs[i]))
+      dest_file <- file.path(
+        dest_dir,
+        filename_from_url(u, pkgs[i, "Package"])
+      )
       message("  ", basename(u), "... ", appendLF = FALSE)
       if (res <- try_download(u, dest_file)) break
     }
     if (length(url)) message(if (res) " done." else "ERROR.")
 
     if (!res) {
-      warning("Cannot download package ", pkgs[i], call. = FALSE)
+      warning("Cannot download package ", pkgs[i, "Package"], call. = FALSE)
       NA_character_
 
     } else {

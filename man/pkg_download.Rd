@@ -7,7 +7,7 @@
 pkg_download(pkgs, dest_dir = ".")
 }
 \arguments{
-\item{pkgs}{A character vector of URLs to try.}
+\item{pkgs}{The data frame of packages to download.}
 
 \item{dest_dir}{Destination directory for the downloaded files.
 The actual file names are extracted from the URLs.}

@@ -65,31 +65,6 @@ str_trim <- function(x) {
   sub("\\s*$", "", sub("^\\s*", "", x))
 }
 
-#' Split pkg-version into data frame with pkg and version
-#'
-#' @param pkgs Character vector of package versions in the
-#'   \code{packagename-version} format.
-#' @return Data frame with columns \code{name} and \code{version}.
-#'
-#' @keywords internal
-
-split_pkg_names_versions <- function(pkgs) {
-
-  if (!length(pkgs)) {
-    return(data_frame(name = character(), version = character()))
-  }
-
-  pkgtab <- data_frame(
-    repo = sub("^([a-zA-Z]+):.*", "\\1", pkgs),
-    name = sub(".*:(.*)-.*$", "\\1", pkgs),
-    version = sub("^[^-]*-?", "", pkgs)
-  )
-
-  stopifnot(all(!is.na(pkgtab$name)))
-
-  pkgtab
-}
-
 #' Extract the package name from a package tarball path or filename
 #'
 #' @param path The package tarball path(s).

@@ -92,21 +92,26 @@ bioc_file <- function(...) {
 
 #' Get download urls for a bunch of packages
 #'
-#' @param pkgs Character vector of packages, including package
-#'   versions, separated by a dash.
+#' @param pkgs Data frame of packages.
 #' @return A list of character vectors, a set of URLs for each package.
 #'
 #' @keywords internal
 
 download_urls <- function(pkgs) {
-  pkgtab <- split_pkg_names_versions(pkgs)
-  stopifnot(all(pkgtab$version != ""))
 
-  lapply(seq_along(pkgs), function(i) {
-    if (pkgtab[i, "repo"] == "cran") {
-      cran_file(pkgtab[i, "name"], pkgtab[i, "version"])
-    } else if (pkgtab[i, "repo"] == "bioc") {
-      bioc_file(pkgtab[i, "name"], pkgtab[i, "version"])
+  lapply(seq_len(nrow(pkgs)), function(i) {
+
+    if (pkgs$repo[i] == "cran") {
+      cran_file(pkgs$name[i], pkgs$version[i])
+
+    } else if (pkgs$repo[i] == "bioc") {
+      bioc_file(pkgs$name[i], pkgs$version[i])
+
+    } else if (pkgs$repo[i] == "url") {
+      ## TODO
+
+    } else {
+      warning("Unknown package source: ", pkgs$repo[i])
     }
   })
 }
