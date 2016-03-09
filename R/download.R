@@ -40,7 +40,7 @@ pkg_download <- function(pkgs, dest_dir = ".") {
     }
   })
 
-  names(result) <- pkgs
+  names(result) <- paste(pkgs$Package, sep = "-", pkgs$Version)
   invisible(result)
 }
 
