@@ -30,8 +30,11 @@ get_package_sources <- function(pkgs) {
 
   source[vapply(pkgs[, "Repository"], identical, TRUE, y = "CRAN")] <- "cran"
   source[! vapply(pkgs[, "biocViews" ], is.na, TRUE)] <- "bioc"
-  source[vapply(pkgs[, "RemoteType"], identical, TRUE, y = "url") &
-           ! vapply(pkgs[, "RemoteUrl"], is.na, TRUE)] <- "url"
+
+  url <- vapply(pkgs[, "RemoteType"], identical, TRUE, y = "url") &
+    ! vapply(pkgs[, "RemoteUrl"], is.na, TRUE)
+  source[url] <- "url"
+  link[url] <- pkgs[url, "RemoteUrl"]
 
   cbind(Source = source, Link = link)
 }

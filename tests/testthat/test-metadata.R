@@ -70,4 +70,10 @@ test_that("works for url packages", {
     c("cran", "url")
   )
 
+  expect_equal(
+    pkgs$Link,
+    c(NA_character_,
+      "https://cran.rstudio.com/src/contrib/sankey_1.0.0.tar.gz"
+      )
+  )
 })
