@@ -67,31 +67,22 @@ install.packages(c("testthat", "pkgconfig"))
 ```
 
 ```
-#> Installing packages into '/private/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T/Rtmp7i74PQ/file12dc249d4d0de'
+#> Installing packages into '/private/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T/RtmpOssfTB/file1003d2f2dd0b1'
 #> (as 'lib' is unspecified)
-#> also installing the dependencies 'memoise', 'digest', 'crayon', 'praise'
+#> also installing the dependency 'praise'
+#> 
+#> Package which is only available in source form, and may need
+#>   compilation of C/C++/Fortran: 'testthat'
 ```
 
 ```
-#> 
-#>   There is a binary version available but the source version is
-#>   later:
-#>        binary source needs_compilation
-#> digest  0.6.8  0.6.9              TRUE
-#> 
 #> 
 #> The downloaded binary packages are in
-#> 	/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T//Rtmp7i74PQ/downloaded_packages
+#> 	/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T//RtmpOssfTB/downloaded_packages
 ```
 
 ```
-#> installing the source package 'digest'
-```
-
-```
-#> 
-#> The downloaded source packages are in
-#> 	'/private/var/folders/ws/7rmdm_cn2pd8l1c3lqyycv0c0000gn/T/Rtmp7i74PQ/downloaded_packages'
+#> installing the source packages 'praise', 'testthat'
 ```
 
 ```r
@@ -100,9 +91,6 @@ installed.packages(lib_dir)[, c("Package", "Version")]
 
 ```
 #>           Package     Version 
-#> crayon    "crayon"    "1.3.1" 
-#> digest    "digest"    "0.6.9" 
-#> memoise   "memoise"   "0.2.1" 
 #> pkgconfig "pkgconfig" "2.0.0" 
 #> praise    "praise"    "1.0.0" 
 #> testthat  "testthat"  "0.11.0"
@@ -119,12 +107,12 @@ read.csv(snapshot)[1:5,]
 ```
 
 ```
-#>     Package Version
-#> 1         R   3.2.3
-#> 2    crayon   1.3.1
-#> 3    digest   0.6.9
-#> 4   memoise   0.2.1
-#> 5 pkgconfig   2.0.0
+#>         Package Version Source Link
+#> 1             R   3.3.0      R   NA
+#> 2     pkgconfig   2.0.0   cran   NA
+#> 3        praise   1.0.0   cran   NA
+#> 4      testthat  0.11.0   cran   NA
+#> 5 BiocInstaller  1.21.3   bioc   NA
 ```
 
 ```r
@@ -150,19 +138,55 @@ restore(snapshot)
 
 ```
 #> Downloading
-#>   crayon_1.3.1.tgz...  done.
-#>   digest_0.6.9.tgz...   digest_0.6.9.tar.gz...  done.
-#>   memoise_0.2.1.tgz...  done.
 #>   pkgconfig_2.0.0.tgz...  done.
-#>   praise_1.0.0.tgz...  done.
-#>   testthat_0.11.0.tgz...  done.
+#>   praise_1.0.0.tgz...   praise_1.0.0.tgz...   praise_1.0.0.tar.gz...  done.
+#>   testthat_0.11.0.tgz...   testthat_0.11.0.tgz...   testthat_0.11.0.tar.gz...  done.
+#>   BiocInstaller_1.21.3.tgz...  done.
+#>   covr_1.2.0.tgz...   covr_1.2.0.tgz...   covr_1.2.0.tar.gz...  done.
+#>   crayon_1.3.1.tgz...  done.
+#>   curl_0.9.5.tgz...   curl_0.9.5.tgz...   curl_0.9.5.tar.gz...   curl_0.9.5.tar.gz...  done.
+#>   devtools_1.10.0.tgz...   devtools_1.10.0.tgz...   devtools_1.10.0.tar.gz...  done.
+#>   digest_0.6.9.tgz...   digest_0.6.9.tgz...   digest_0.6.9.tar.gz...  done.
+#>   git2r_0.13.1.tgz...  done.
+#>   htmltools_0.3.tgz...   htmltools_0.3.tgz...   htmltools_0.3.tar.gz...  done.
+#>   httr_1.1.0.tgz...   httr_1.1.0.tgz...   httr_1.1.0.tar.gz...  done.
+#>   jsonlite_0.9.19.tgz...   jsonlite_0.9.19.tgz...   jsonlite_0.9.19.tar.gz...  done.
+#>   lazyeval_0.1.10.tgz...   lazyeval_0.1.10.tgz...   lazyeval_0.1.10.tar.gz...  done.
+#>   magrittr_1.5.tgz...   magrittr_1.5.tgz...   magrittr_1.5.tar.gz...  done.
+#>   memoise_1.0.0.tgz...   memoise_1.0.0.tgz...   memoise_1.0.0.tar.gz...  done.
+#>   mime_0.4.tgz...  done.
+#>   openssl_0.9.1.tgz...   openssl_0.9.1.tgz...   openssl_0.9.1.tar.gz...   openssl_0.9.1.tar.gz...  done.
+#>   R6_2.1.2.tgz...   R6_2.1.2.tgz...   R6_2.1.2.tar.gz...  done.
+#>   rex_1.0.1.tgz...   rex_1.0.1.tgz...   rex_1.0.1.tar.gz...  done.
+#>   rstudioapi_0.5.tgz...  done.
+#>   simplegraph_1.0.0.tgz...   simplegraph_1.0.0.tgz...   simplegraph_1.0.0.tar.gz...  done.
+#>   whisker_0.3-2.tgz...  done.
+#>   withr_1.0.1.tgz...   withr_1.0.1.tgz...   withr_1.0.1.tar.gz...  done.
 #> Installing
-#>   digest_0.6.9.tar.gz ... done.
-#>   memoise_0.2.1.tgz ... done.
-#>   crayon_1.3.1.tgz ... done.
 #>   pkgconfig_2.0.0.tgz ... done.
-#>   praise_1.0.0.tgz ... done.
-#>   testthat_0.11.0.tgz ... done.
+#>   praise_1.0.0.tar.gz ... done.
+#>   testthat_0.11.0.tar.gz ... done.
+#>   BiocInstaller_1.21.3.tgz ... done.
+#>   covr_1.2.0.tar.gz ... done.
+#>   crayon_1.3.1.tgz ... done.
+#>   curl_0.9.5.tar.gz ... done.
+#>   devtools_1.10.0.tar.gz ... done.
+#>   digest_0.6.9.tar.gz ... done.
+#>   git2r_0.13.1.tgz ... done.
+#>   htmltools_0.3.tar.gz ... done.
+#>   httr_1.1.0.tar.gz ... done.
+#>   jsonlite_0.9.19.tar.gz ... done.
+#>   lazyeval_0.1.10.tar.gz ... done.
+#>   magrittr_1.5.tar.gz ... done.
+#>   memoise_1.0.0.tar.gz ... done.
+#>   mime_0.4.tgz ... done.
+#>   openssl_0.9.1.tar.gz ... done.
+#>   R6_2.1.2.tar.gz ... done.
+#>   rex_1.0.1.tar.gz ... done.
+#>   rstudioapi_0.5.tgz ... done.
+#>   simplegraph_1.0.0.tar.gz ... done.
+#>   whisker_0.3-2.tgz ... done.
+#>   withr_1.0.1.tar.gz ... done.
 ```
 
 ```r
@@ -170,13 +194,31 @@ installed.packages(new_lib_dir)[, c("Package", "Version")]
 ```
 
 ```
-#>           Package     Version 
-#> crayon    "crayon"    "1.3.1" 
-#> digest    "digest"    "0.6.9" 
-#> memoise   "memoise"   "0.2.1" 
-#> pkgconfig "pkgconfig" "2.0.0" 
-#> praise    "praise"    "1.0.0" 
-#> testthat  "testthat"  "0.11.0"
+#>               Package         Version 
+#> BiocInstaller "BiocInstaller" "1.21.3"
+#> covr          "covr"          "1.2.0" 
+#> crayon        "crayon"        "1.3.1" 
+#> curl          "curl"          "0.9.5" 
+#> devtools      "devtools"      "1.10.0"
+#> digest        "digest"        "0.6.9" 
+#> git2r         "git2r"         "0.13.1"
+#> htmltools     "htmltools"     "0.3"   
+#> httr          "httr"          "1.1.0" 
+#> jsonlite      "jsonlite"      "0.9.19"
+#> lazyeval      "lazyeval"      "0.1.10"
+#> magrittr      "magrittr"      "1.5"   
+#> memoise       "memoise"       "1.0.0" 
+#> mime          "mime"          "0.4"   
+#> openssl       "openssl"       "0.9.1" 
+#> pkgconfig     "pkgconfig"     "2.0.0" 
+#> praise        "praise"        "1.0.0" 
+#> R6            "R6"            "2.1.2" 
+#> rex           "rex"           "1.0.1" 
+#> rstudioapi    "rstudioapi"    "0.5"   
+#> simplegraph   "simplegraph"   "1.0.0" 
+#> testthat      "testthat"      "0.11.0"
+#> whisker       "whisker"       "0.3-2" 
+#> withr         "withr"         "1.0.1"
 ```
 
 
