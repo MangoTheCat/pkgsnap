@@ -110,7 +110,10 @@ download_urls <- function(pkgs) {
 
   lapply(seq_len(nrow(pkgs)), function(i) {
 
-    if (pkgs$Source[i] == "cran") {
+    if (is.na(pkgs$Source[i])) {
+      warning("Unknown package source: ", pkgs$repo[i])
+     
+    } else if (pkgs$Source[i] == "cran") {
       cran_file(pkgs$Package[i], pkgs$Version[i])
 
     } else if (pkgs$Source[i] == "bioc") {
