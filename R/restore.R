@@ -29,6 +29,9 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   
   # Remove this package (pkgsnap) from the list
   pkgs <- pkgs[pkgs$Package!="pkgsnap", ]
+  
+  # Remove packages with NA as source
+  pkgs <- pkgs[!is.na(pkgs$Source), ]
 
   ## Download and return the downloaded file names
   pkg_files <- pkg_download(pkgs, dest_dir = tempdir())
