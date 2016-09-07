@@ -35,7 +35,7 @@ get_description <- function(package_file) {
         exdir = tmp)
  } else {
   untar(package_file,
-        files = file.path(pkg, sep = "/", "DESCRIPTION"),
+        files = paste(pkg, sep = "/", "DESCRIPTION"),
         exdir = tmp)
  }
  
