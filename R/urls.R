@@ -113,7 +113,7 @@ download_urls <- function(pkgs) {
     if (is.na(pkgs$Source[i])) {
       warning("Unknown package source: ", pkgs$repo[i])
       character()
-     
+      
     } else if (pkgs$Source[i] == "cran") {
       cran_file(pkgs$Package[i], pkgs$Version[i])
 
