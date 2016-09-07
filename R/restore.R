@@ -32,9 +32,11 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
 
   ## Download and return the downloaded file names
   pkg_files <- pkg_download(pkgs, dest_dir = tempdir())
+ 
+  pkg_files <- drop_invalid_path(pkg_files)
 
   deps <- lapply(pkg_files, get_deps)
-
+  
   deps <- drop_missing_deps(deps)
 
   order <- install_order(deps)
@@ -146,4 +148,15 @@ check_R_core <- function(pkgs, R) {
   }
   
   pkgs
+}
+
+#' Drop packages with invalid destination
+#'
+#' @param pkg_files A named list of character vectors.
+#' @return A named character vector without NA destination files.
+#'
+#' @keywords internal
+
+drop_invalid_path <- function(pkg_files) {
+ pkg_files <- pkg_files[!is.na(pkg_files), drop = FALSE]
 }
