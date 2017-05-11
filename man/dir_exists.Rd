@@ -16,4 +16,3 @@ Logical scalar.
 Check if a directory exists
 }
 \keyword{internal}
-

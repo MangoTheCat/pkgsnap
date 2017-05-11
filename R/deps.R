@@ -9,7 +9,7 @@ dep_types <- c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
 #' A dependency is hard if the depended package is required
 #' for installing and/or loading the package.
 #'
-#' @name dep_types
+#' @rdname dep_types
 #' @keywords internal
 
 hard_dep_types <- c("Imports", "Depends", "LinkingTo")

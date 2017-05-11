@@ -19,4 +19,3 @@ A data frame with three columns: \code{type},
 Parse a DESCRIPTION dependency field
 }
 \keyword{internal}
-

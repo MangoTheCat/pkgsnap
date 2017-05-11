@@ -39,4 +39,3 @@ snap(to = tmp <- tempfile())
 
 head(read.csv(tmp))
 }
-

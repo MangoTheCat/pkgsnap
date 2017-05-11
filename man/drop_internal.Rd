@@ -20,4 +20,3 @@ packages, these are supposed to be installed on the system, together
 with R.
 }
 \keyword{internal}
-

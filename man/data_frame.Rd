@@ -17,4 +17,3 @@ It does not create factor columns.
 It recycles columns to match the longest column.
 }
 \keyword{internal}
-

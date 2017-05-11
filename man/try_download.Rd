@@ -19,4 +19,3 @@ try_download(url, dest_file)
 Try to download a file
 }
 \keyword{internal}
-

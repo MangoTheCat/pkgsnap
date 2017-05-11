@@ -19,4 +19,3 @@ This is usually just the part after the last slash,
 but for https://github.com/cran/* URLs it is a bit trickier.
 }
 \keyword{internal}
-

@@ -11,4 +11,3 @@ This is needed to calculate possible R package locations
 for downloads.
 }
 \keyword{internal}
-

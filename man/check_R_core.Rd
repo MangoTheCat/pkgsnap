@@ -19,4 +19,3 @@ The same data.frame with the R package removed.
 Check listed R version against installed
 }
 \keyword{internal}
-
