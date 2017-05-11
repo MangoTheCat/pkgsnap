@@ -23,10 +23,10 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   } else {
     pkgs <- from
   }
-  
+
   # Check the R version and remove from the list
   pkgs <- check_R_core(pkgs, R)
-  
+
   # Remove this package (pkgsnap) from the list
   pkgs <- pkgs[pkgs$Package!="pkgsnap", ]
 
@@ -127,17 +127,17 @@ install_order <- function(graph) {
 #' @return The same data.frame with the R package removed.
 #'
 #' @keywords internal
-#' 
+#'
 check_R_core <- function(pkgs, R) {
-  
+
   # Find the row containing R
   ir <- which(pkgs$Package == "R")
-  
+
   if (length(ir) == 1) {
     # The R version on this installation
     coreVersion <- paste(R.version$major, R.version$minor, sep = ".")
     pkgsVersion <- pkgs$Version[ir]
-    
+
     if(pkgsVersion != coreVersion) {
       if (R) {
         stop("Packages were installed with R ", pkgsVersion,
@@ -150,10 +150,10 @@ check_R_core <- function(pkgs, R) {
     }
     # Remove from the manifest
     pkgs <- pkgs[-ir, ]
-    
+
   } else {
     warning("No R version listed with package list.")
   }
-  
+
   pkgs
 }
