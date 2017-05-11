@@ -9,13 +9,17 @@
 #'   Alternatively a data frame with columns \code{Package} and
 #'   \code{Version}.
 #' @param R If TRUE the target version of R must match.
-#' Otherwise it will only give a warning.
+#'   Otherwise it will only give a warning.
+#' @param needed_only Only install packages if needed. Installation is
+#'   needed if any of the following are true: the package is missing,
+#'   or if it is installed with a different version, or was built on a
+#'   different version of R.
 #' @param ... Additional arguments, passed to \code{install.packages}.
 #'
 #' @export
 #' @importFrom utils install.packages read.csv
 
-restore <- function(from = "packages.csv", R = TRUE, ...) {
+restore <- function(from = "packages.csv", R = TRUE, needed_only = FALSE, ...) {
 
   if (is.character(from)) {
     pkgs <- read.csv(from, stringsAsFactors = FALSE)
@@ -39,6 +43,8 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
     )
   }
   pkgs <- pkgs[!unkown_source_rows, ]
+
+  pkgs <- drop_unneeded_pkgs(pkgs)
 
   ## Download and return the downloaded file names
   pkg_files <- pkg_download(pkgs, dest_dir = tempdir())
@@ -70,6 +76,39 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
 drop_missing_deps <- function(deps) {
   pkgs <- names(deps)
   lapply(deps, intersect, pkgs)
+}
+
+#' Drop packages that do not need an update
+#'
+#' If any of the following are true, then a package is needed; otherwise it
+#' unneeded. The package is not installed, or the currently installed version of
+#' the package is not the same as the target version, or the currently installed
+#' package was not built with the current version of R.
+#'
+#' @param pkgs A data frame with columns Package and Version
+#' @return A (filtered) data frame with columns Package and Version
+#'
+#' @keywords internal
+
+drop_unneeded_pkgs <- function(pkgs) {
+  cur_pkgs <- as.data.frame(installed.packages(), stringsAsFactors = FALSE,
+                            row.names = FALSE)
+  cur_pkgs$Built <- as.package_version(cur_pkgs$Built)
+
+  is_needed <- function(package, version) {
+    if (!(package %in% cur_pkgs$Package) ||
+        cur_pkgs$Version[cur_pkgs$Package == package] != version ||
+        cur_pkgs$Built[cur_pkgs$Package == package] != getRversion())
+    {
+      return(TRUE)
+    } else {
+      return(FALSE)
+    }
+  }
+
+  keep_idx <- as.logical(mapply(is_needed, pkgs$Package, pkgs$Version,
+                                SIMPLIFY=FALSE, USE.NAMES=FALSE))
+  pkgs[keep_idx, ]
 }
 
 #' Topological order of the packages
