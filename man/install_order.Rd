@@ -20,4 +20,3 @@ Character vector of package names in an order that
 This is the correct installation order.
 }
 \keyword{internal}
-

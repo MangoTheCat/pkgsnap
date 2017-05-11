@@ -26,4 +26,3 @@ Character vector or URLs.
 Get a list of candidate URLs for a certain version of a package
 }
 \keyword{internal}
-

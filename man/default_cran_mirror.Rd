@@ -13,4 +13,3 @@ The RStudio mirror is in the Amazon cloud, so most times it has
 the best response times, and download speed.
 }
 \keyword{internal}
-

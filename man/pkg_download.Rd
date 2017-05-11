@@ -20,4 +20,3 @@ Path to the downloaded file, or \code{NA_character_}
 Download R packages (or other files)
 }
 \keyword{internal}
-

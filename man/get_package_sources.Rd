@@ -17,4 +17,3 @@ Two columns, source and link
 Check where a package was installed from
 }
 \keyword{internal}
-

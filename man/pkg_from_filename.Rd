@@ -16,4 +16,3 @@ Package name(s).
 Extract the package name from a package tarball path or filename
 }
 \keyword{internal}
-

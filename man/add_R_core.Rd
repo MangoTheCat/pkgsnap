@@ -17,4 +17,3 @@ version in major.minor format (e.g. R 3.2.2).
 Add R version to package inventory
 }
 \keyword{internal}
-

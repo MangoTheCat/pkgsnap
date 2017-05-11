@@ -16,4 +16,3 @@ A named list of DESCRIPTION fields.
 Extract and read the DESCRIPTION file from an R package tarball
 }
 \keyword{internal}
-

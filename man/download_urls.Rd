@@ -16,4 +16,3 @@ A list of character vectors, a set of URLs for each package.
 Get download urls for a bunch of packages
 }
 \keyword{internal}
-

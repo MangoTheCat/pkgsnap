@@ -5,6 +5,7 @@
 #' @param r RHS.
 #' @return LHS if not \code{NULL}, otherwise RHS.
 #'
+#' @name OR
 #' @keywords internal
 
 `%||%` <- function(l, r) {

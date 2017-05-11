@@ -18,4 +18,3 @@ A dependency is hard if the depended package is required
 for installing and/or loading the package.
 }
 \keyword{internal}
-

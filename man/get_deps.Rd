@@ -19,4 +19,3 @@ Hard dependencies include \code{Imports}, \code{Depends} and
 \code{LinkingTo}.
 }
 \keyword{internal}
-

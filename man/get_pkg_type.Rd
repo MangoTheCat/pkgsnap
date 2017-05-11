@@ -10,4 +10,3 @@ get_pkg_type()
 \code{both} means binaries first, then source packages.
 }
 \keyword{internal}
-
