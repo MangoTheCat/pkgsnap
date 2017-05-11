@@ -100,9 +100,9 @@ drop_unneeded_pkgs <- function(pkgs) {
         cur_pkgs$Version[cur_pkgs$Package == package] != version ||
         cur_pkgs$Built[cur_pkgs$Package == package] != getRversion())
     {
-      return(TRUE)
+      TRUE
     } else {
-      return(FALSE)
+      FALSE
     }
   }
 
