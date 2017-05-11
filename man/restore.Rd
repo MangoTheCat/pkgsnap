@@ -4,7 +4,7 @@
 \alias{restore}
 \title{Restore (=install) certain CRAN package versions}
 \usage{
-restore(from = "packages.csv", R = TRUE, ...)
+restore(from = "packages.csv", R = TRUE, needed_only = FALSE, ...)
 }
 \arguments{
 \item{from}{Name of a file created by \code{\link{snap}}.
@@ -13,6 +13,11 @@ Alternatively a data frame with columns \code{Package} and
 
 \item{R}{If TRUE the target version of R must match.
 Otherwise it will only give a warning.}
+
+\item{needed_only}{Only install packages if needed. Installation is
+needed if any of the following are true: the package is missing,
+or if it is installed with a different version, or was built on a
+different version of R.}
 
 \item{...}{Additional arguments, passed to \code{install.packages}.}
 }
