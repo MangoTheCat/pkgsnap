@@ -20,7 +20,7 @@ hard_dep_types <- c("Imports", "Depends", "LinkingTo")
 #' @return A named list of DESCRIPTION fields.
 #'
 #' @keywords internal
-#' @importFrom utils untar
+#' @importFrom utils untar unzip
 
 get_description <- function(package_file) {
 
@@ -29,11 +29,12 @@ get_description <- function(package_file) {
   tmp <- tempfile()
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
 
-  untar(
-    package_file,
-    files = paste(pkg, sep = "/", "DESCRIPTION"),
-    exdir = tmp
-  )
+  unpack <- untar
+  if (.Platform$OS.type[1] == "windows") { 
+    unpack <- unzip
+  }
+  unpack(package_file, files = paste(pkg, sep = "/", "DESCRIPTION"), 
+    exdir = tmp)
 
   desc_file <- file.path(tmp, pkg, "DESCRIPTION")
   as.list(read.dcf(desc_file)[1, ])
