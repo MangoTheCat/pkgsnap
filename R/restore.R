@@ -31,14 +31,14 @@ restore <- function(from = "packages.csv", R = TRUE, ...) {
   pkgs <- pkgs[pkgs$Package!="pkgsnap", ]
 
   # Don't try to install packages that have an unknown source
-  unkown_source_rows <- is.na(pkgs$Source)
-  if (any(unkown_source_rows)) {
+  unknown_source_rows <- is.na(pkgs$Source)
+  if (any(unknown_source_rows)) {
     warning(
-      "Source repository is unkown for ",
-      paste(pkgs$Package[unkown_source_rows], collapse = ", ")
+      "Source repository is unknown for ",
+      paste(pkgs$Package[unknown_source_rows], collapse = ", ")
     )
   }
-  pkgs <- pkgs[!unkown_source_rows, ]
+  pkgs <- pkgs[!unknown_source_rows, ]
 
   ## Download and return the downloaded file names
   pkg_files <- pkg_download(pkgs, dest_dir = tempdir())
