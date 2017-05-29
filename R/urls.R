@@ -12,7 +12,7 @@ default_cran_mirror <- "http://cran.rstudio.com"
 #' If a CRAN mirror is configured, use it. Otherwise, use default
 #' @keywords internal
 
-get_CRAN_mirror <- function() {
+get_cran_mirror <- function() {
   repos <- getOption("repos")
   if (!("CRAN" %in% names(repos)) || "@CRAN@" %in% repos) {
     message("No CRAN repository configured. Using default for pkgsnap: ", default_cran_mirror)
@@ -58,7 +58,7 @@ get_pkg_type <- function() {
 
 cran_file <- function(package, version, type = get_pkg_type(),
                       r_minor = r_minor_version(),
-                      cran_mirror = get_CRAN_mirror()) {
+                      cran_mirror = get_cran_mirror()) {
 
   if (type == "both") {
     c(cran_file(package, version, type = "binary", r_minor = r_minor, cran_mirror = cran_mirror),
