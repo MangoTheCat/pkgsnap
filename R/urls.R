@@ -14,11 +14,13 @@ default_cran_mirror <- "http://cran.rstudio.com"
 
 get_cran_mirror <- function() {
   repos <- getOption("repos")
-  if (!("CRAN" %in% names(repos)) || "@CRAN@" %in% repos) {
-    message("No CRAN repository configured. Using default for pkgsnap: ", default_cran_mirror)
-    return(default_cran_mirror)
+  cran_mirror <- if (!("CRAN" %in% names(repos)) || "@CRAN@" %in% repos) {
+    default_cran_mirror
+  } else {
+    repos[["CRAN"]]
   }
-  repos[["CRAN"]]
+  message(sprintf("Using CRAN mirror %s.", cran_mirror))
+  cran_mirror
 }
 
 #' Extract the minor version of the running R
