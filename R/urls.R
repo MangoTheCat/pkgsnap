@@ -1,11 +1,27 @@
 
-#' CRAN mirror to use
+#' Default CRAN mirror to use
 #'
 #' The RStudio mirror is in the Amazon cloud, so most times it has
 #' the best response times, and download speed.
 #' @keywords internal
 
 default_cran_mirror <- "http://cran.rstudio.com"
+
+#' CRAN mirror to use
+#' 
+#' If a CRAN mirror is configured, use it. Otherwise, use default
+#' @keywords internal
+
+get_cran_mirror <- function() {
+  repos <- getOption("repos")
+  cran_mirror <- if (!("CRAN" %in% names(repos)) || "@CRAN@" %in% repos) {
+    default_cran_mirror
+  } else {
+    repos[["CRAN"]]
+  }
+  message(sprintf("Using CRAN mirror %s.", cran_mirror))
+  cran_mirror
+}
 
 #' Extract the minor version of the running R
 #'
@@ -35,14 +51,16 @@ get_pkg_type <- function() {
 #' @param type Package type, e.g. \code{binary}, \code{source}, etc.
 #'   See the \code{type} argument of \code{utils::install.packages}.
 #' @param r_minor The minor R version to search for packages for.
-#'   Defaults to the currently running R version.
+#' @param cran_mirror The mirror to use for CRAN packages. Use 
+#'   \code{\link{default_cran_mirror}} if not configured in 
+#'   \code{getOption("repos")} 
 #' @return Character vector or URLs.
 #'
 #' @keywords internal
 
 cran_file <- function(package, version, type = get_pkg_type(),
                       r_minor = r_minor_version(),
-                      cran_mirror = default_cran_mirror) {
+                      cran_mirror = get_cran_mirror()) {
 
   if (type == "both") {
     c(cran_file(package, version, type = "binary", r_minor = r_minor, cran_mirror = cran_mirror),
